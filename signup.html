@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الحساب | تسجيل الدخول & إنشاء حساب</title>
+<style>
+/* ===== خلفية وتخطيط عام ===== */
+body {
+  font-family: 'Cairo', sans-serif;
+  background: linear-gradient(135deg,#6a11cb 0%,#2575fc 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+/* ===== الصندوق ===== */
+.auth-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 35px;
+  width: 350px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  text-align: center;
+  transition: transform 0.4s ease;
+}
+.auth-box:hover { transform: translateY(-4px); }
+
+h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+/* ===== أزرار التبويب ===== */
+.tab-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 25px;
+}
+.tab-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 10px;
+  margin: 0 5px;
+  transition: background 0.3s, color 0.3s;
+}
+.tab-buttons button.active {
+  background: #2575fc;
+  color: #fff;
+}
+
+/* ===== النماذج ===== */
+form {
+  text-align: right;
+}
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: 600;
+}
+input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+input:focus {
+  border-color: #2575fc;
+  outline: none;
+}
+button.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2575fc;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.3s, transform 0.2s;
+}
+button.submit-btn:hover {
+  background: #1b5edc;
+  transform: scale(1.02);
+}
+
+/* ===== نصوص وروابط ===== */
+.switch {
+  margin-top: 15px;
+  font-size: 14px;
+}
+.switch a {
+  color: #2575fc;
+  text-decoration: none;
+}
+.switch a:hover { text-decoration: underline; }
+
+.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="auth-box">
+  <div class="tab-buttons">
+    <button id="btn-login" class="active">تسجيل الدخول</button>
+    <button id="btn-signup">إنشاء حساب</button>
+  </div>
+
+  <!-- تسجيل الدخول -->
+  <form id="loginForm">
+    <h2>مرحباً بعودتك 👋</h2>
+    <label>البريد الإلكتروني</label>
+    <input type="email" id="loginEmail" placeholder="name@email.com" required>
+    <label>كلمة المرور</label>
+    <input type="password" id="loginPassword" placeholder="••••••" required>
+    <button type="submit" class="submit-btn">دخول</button>
+  </form>
+
+  <!-- إنشاء حساب -->
+  <form id="signupForm" class="hidden">
+    <h2>أنشئ حساب جديد ✨</h2>
+    <label>الاسم الكامل</label>
+    <input type="text" id="fullName" placeholder="الاسم" required>
+    <label>البريد الإلكتروني</label>
+    <input type="email" id="email" placeholder="name@email.com" required>
+    <label>كلمة المرور</label>
+    <input type="password" id="password" placeholder="••••••" required>
+    <label>تأكيد كلمة المرور</label>
+    <input type="password" id="confirmPassword" placeholder="••••••" required>
+    <button type="submit" class="submit-btn">إنشاء حساب</button>
+  </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm  = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+  const btnLogin   = document.getElementById('btn-login');
+  const btnSignup  = document.getElementById('btn-signup');
+
+  // تبديل النماذج
+  btnLogin.addEventListener('click', () => {
+    loginForm.classList.remove('hidden');
+    signupForm.classList.add('hidden');
+    btnLogin.classList.add('active');
+    btnSignup.classList.remove('active');
+  });
+  btnSignup.addEventListener('click', () => {
+    signupForm.classList.remove('hidden');
+    loginForm.classList.add('hidden');
+    btnSignup.classList.add('active');
+    btnLogin.classList.remove('active');
+  });
+
+  // تحقق تسجيل الدخول
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass  = document.getElementById('loginPassword').value;
+    if (!validateEmail(email)) return alert('❌ البريد غير صالح');
+    if (pass.length < 6) return alert('❌ كلمة المرور أقل من 6 أحرف');
+    alert('🚀 تم تسجيل الدخول (اربطه مع الباك-إند)');
+    loginForm.reset();
+  });
+
+  // تحقق إنشاء حساب
+  signupForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const name  = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const pass  = document.getElementById('password').value;
+    const confirm = document.getElementById('confirmPassword').value;
+    if (name.length < 3) return alert('❌ الاسم أقل من 3 أحرف');
+    if (!validateEmail(email)) return alert('❌ البريد غير صالح');
+    if (pass.length < 6) return alert('❌ كلمة المرور أقل من 6 أحرف');
+    if (pass !== confirm) return alert('❌ كلمة المرور غير متطابقة');
+    alert('✅ تم إنشاء الحساب بنجاح!');
+    signupForm.reset();
+  });
+
+  function validateEmail(email) {
+    return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+  }
+});
+</script>
+</body>
+</html>

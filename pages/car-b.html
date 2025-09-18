@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المركبات الهجينة - AUTOREFERENCE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --white: #fff;
+            --text-dark: #333;
+            --text-light: #777;
+            --transition: all 0.3s ease;
+            --border-radius: 15px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #d6eaf8 100%);
+            color: var(--text-dark);
+            direction: rtl;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .phone-ar {
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(52, 152, 219, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .logo img {
+            height: 45px;
+            margin-left: 15px;
+            transition: var(--transition);
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 10;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-dark);
+            border-radius: 5px;
+            transition: all 0.3s linear;
+            margin: 3px 0;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            z-index: 10;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links .active a::after {
+            width: 100%;
+        }
+
+        .nav-links .active a {
+            color: var(--primary-color);
+        }
+
+        #lang-toggle {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.2);
+        }
+
+        #lang-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: var(--white);
+            text-align: center;
+            padding: 120px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><rect width="40" height="40" fill="white" opacity="0.02"/></svg>');
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, #fff, #a0d8ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: var(--white);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-container {
+            margin-top: 40px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-bar input {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            width: 500px;
+            max-width: 100%;
+            font-size: 1.1rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-bar button {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .search-bar button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Section Styles */
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 80px;
+        }
+
+        /* Why Hybrid Section */
+        .why-hybrid {
+            padding: 80px 0;
+            background-color: var(--white);
+            position: relative;
+        }
+
+        .why-hybrid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            opacity: 0.2;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .reason-card {
+            padding: 30px;
+            border-radius: var(--border-radius);
+            background-color: #f0f7ff;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .reason-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+
+        .reason-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .reason-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Hybrid Car Section */
+        .hybrid-car-section {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+
+        .hybrid-car-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            margin-bottom: 60px;
+        }
+
+        .hybrid-car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .car-details {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            flex-direction: row-reverse;
+        }
+
+        .car-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .car-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 3px solid transparent;
+            border-image: linear-gradient(45deg, var(--primary-color), var(--accent-color)) 1;
+        }
+
+        .car-image img:hover {
+            transform: scale(1.02);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .car-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+        }
+
+        .car-info h3 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .car-info .price {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .car-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .spec-item {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .spec-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .spec-item i {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .spec-item h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .spec-item p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin: 5px 0 0;
+        }
+
+        .car-features {
+            margin-bottom: 20px;
+        }
+
+        .car-features h4 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .car-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .car-features li {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            position: relative;
+            padding-right: 25px;
+        }
+
+        .car-features li::before {
+            content: '\2022';
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: -1em;
+        }
+
+        .car-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .car-buttons .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            text-align: center;
+            flex: 1;
+            min-width: 160px;
+        }
+
+        .car-buttons .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .car-buttons .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+        }
+
+        .car-buttons .btn-secondary:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        /* CTA for Hybrid Section */
+        .cta-hybrid {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-hybrid h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cta-hybrid p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #d0d0d0;
+        }
+
+        .cta-hybrid .cta-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-hybrid .cta-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .cta-hybrid .cta-form .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+
+        .cta-hybrid .cta-form .form-group input,
+        .cta-hybrid .cta-form .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            font-size: 1rem;
+            direction: rtl;
+            font-family: inherit;
+        }
+
+        .cta-hybrid .cta-form .btn {
+            background-color: var(--white);
+            color: var(--secondary-color);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .cta-hybrid .cta-form .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e2a38;
+            color: #ecf0f1;
+            padding: 80px 0 30px;
+            text-align: right;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 50px;
+            margin-left: 15px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            color: #ecf0f1;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-column p,
+        .footer-column li {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #d0d0d0;
+        }
+
+        .footer-column li a {
+            color: #d0d0d0;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-icons {
+            margin-top: 25px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: #d0d0d0;
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            font-size: 0.9rem;
+            color: #95a5a6;
+        }
+
+        .icon-pin,
+        .icon-phone,
+        .icon-email,
+        .icon-clock {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .car-details {
+                gap: 30px;
+            }
+            
+            .reason-card {
+                padding: 25px;
+            }
+            
+            .reason-card i {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 70%;
+                background-color: var(--white);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 80px 30px 30px;
+                gap: 20px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 99;
+            }
+            
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 10px 0;
+            }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                display: none;
+                margin-top: 10px;
+                margin-right: 20px;
+                width: 100%;
+            }
+            
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+            
+            .navbar {
+                flex-wrap: wrap;
+            }
+            
+            .hero {
+                padding: 100px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 60px;
+            }
+            
+            .car-details {
+                flex-direction: column;
+            }
+            
+            .search-bar input {
+                width: 100%;
+            }
+            
+            .cta-hybrid {
+                padding: 60px 0;
+            }
+            
+            .cta-hybrid h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 25px;
+            }
+            
+            .footer-column {
+                align-items: center;
+            }
+            
+            .footer-column h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-column p,
+            .footer-column li {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .footer-logo {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 80px 15px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 50px;
+            }
+            
+            .reason-card {
+                padding: 20px;
+            }
+            
+            .reason-card i {
+                font-size: 2.5rem;
+            }
+            
+            .reason-card h4 {
+                font-size: 1.3rem;
+            }
+            
+            .cta-hybrid h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-hybrid .cta-form {
+                padding: 30px 20px;
+            }
+            
+            .cta-hybrid .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            #lang-toggle {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Language-specific adjustments */
+        [dir="ltr"] body {
+            direction: ltr;
+            text-align: left;
+        }
+        
+        [dir="ltr"] .logo img {
+            margin-right: 15px;
+            margin-left: 0;
+        }
+        
+        [dir="ltr"] .nav-links {
+            padding-right: 0;
+        }
+        
+        [dir="ltr"] .nav-links a::after {
+            right: auto;
+            left: 0;
+        }
+        
+        [dir="ltr"] footer {
+            text-align: left;
+        }
+        
+        [dir="ltr"] .footer-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            text-align: left;
+        }
+        
+        [dir="ltr"] .footer-column {
+            align-items: flex-start;
+        }
+        
+        [dir="ltr"] .footer-column h4::after {
+            left: 0;
+            right: auto;
+            transform: none;
+        }
+        
+        [dir="ltr"] .footer-column p,
+        [dir="ltr"] .footer-column li {
+            justify-content: flex-start;
+        }
+        
+        [dir="ltr"] .footer-logo {
+            flex-direction: row-reverse;
+        }
+        
+        [dir="ltr"] .footer-logo img {
+            margin-left: 0;
+            margin-right: 15px;
+        }
+        
+        [dir="ltr"] .social-icons {
+            justify-content: flex-start;
+        }
+        
+        [dir="ltr"] .car-details {
+            flex-direction: row;
+        }
+        
+        [dir="ltr"] .car-features li {
+            padding-right: 0;
+            padding-left: 25px;
+        }
+        
+        [dir="ltr"] .car-features li::before {
+            margin-left: -1em;
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <a href="../pages/car-b.html">
+                    <img src="../images/autoreference.png" alt="Changan Logo">
+                </a>
+                <h2 data-lang="ar">اوتوريفرنس </h2>
+                <h2 class="hidden" data-lang="en">AUTOREFERENCE</h2>
+            </div>
+            <button class="menu-toggle" id="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="../index.html" data-lang="ar">الرئيسية</a><a href="../index.html" class="hidden" data-lang="en">Home</a></li>
+                    <li class="dropdown">
+                        <a href="./car.html" class="nav-link-with-icon" data-lang="ar">المركبات <i class="fas fa-chevron-down"></i></a>
+                        <a href="./car.html" class="nav-link-with-icon hidden" data-lang="en">Vehicles <i class="fas fa-chevron-down"></i></a>
+                    
+                    </li>
+                    <li><a href="../mrka.html" data-lang="ar">ماركة شانجان</a><a href="../mrka.html" class="hidden" data-lang="en">Changan Brand</a></li>
+                    <li><a href="../services.html" data-lang="ar">خدمات</a><a href="../services.html" class="hidden" data-lang="en">Services</a></li>
+                    <li><a href="../about-us.html" data-lang="ar">معلومات عنا</a><a href="../about-us.html" class="hidden" data-lang="en">About Us</a></li>
+                    <li><a href="../contact.html" data-lang="ar">اتصل بنا</a><a href="../contact.html" class="hidden" data-lang="en">Contact Us</a></li>
+                    <li><a href="../test-drive.html" class="btn-test-drive" data-lang="ar">اختبار القيادة</a><a href="../test-drive.html" class="btn-test-drive hidden" data-lang="en">Test Drive</a></li>
+                </ul>
+            </nav>
+            <button id="lang-toggle">English</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <h1 class="section-title" data-lang="ar">المركبات الهجينة</h1>
+                <h1 class="section-title hidden" data-lang="en">Hybrid Vehicles</h1>
+                <p data-lang="ar">اكتشف التوازن المثالي بين الكفاءة والأداء مع أحدث تقنيات المركبات الهجينة من شانجان، المتوفرة الآن في اليمن.</p>
+                <p class="hidden" data-lang="en">Discover the perfect balance of efficiency and performance with the latest hybrid vehicle technology from Changan, now available in Yemen.</p>
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" placeholder="ابحث عن مركبتك الهجينة المثالية..." data-lang="ar">
+                        <input type="text" placeholder="Search for your perfect hybrid vehicle..." class="hidden" data-lang="en">
+                        <button data-lang="ar">البحث</button>
+                        <button class="hidden" data-lang="en">Search</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-hybrid">
+            <div class="container">
+                <h2 class="section-title" data-lang="ar">لماذا تختار مركبة هجينة؟</h2>
+                <h2 class="section-title hidden" data-lang="en">Why Choose a Hybrid Vehicle?</h2>
+                <p class="section-subtitle" data-lang="ar">اكتشف الفوائد العديدة للانتقال إلى المركبة الهجينة.</p>
+                <p class="section-subtitle hidden" data-lang="en">Discover the many benefits of switching to a hybrid vehicle.</p>
+                
+                <div class="reasons-grid">
+                    <div class="reason-card">
+                        <i class="fas fa-car-battery"></i>
+                        <h4 data-lang="ar">كفاءة استثنائية</h4>
+                        <h4 class="hidden" data-lang="en">Exceptional Efficiency</h4>
+                        <p data-lang="ar">توفر المركبات الهجينة كفاءة وقود أعلى بكثير من المركبات التقليدية.</p>
+                        <p class="hidden" data-lang="en">Hybrid vehicles offer much higher fuel efficiency than conventional vehicles.</p>
+                    </div>
+                    <div class="reason-card">
+                        <i class="fas fa-leaf"></i>
+                        <h4 data-lang="ar">انبعاثات منخفضة</h4>
+                        <h4 class="hidden" data-lang="en">Low Emissions</h4>
+                        <p data-lang="ar">تقليل كبير في انبعاثات الكربون مقارنة بالمركبات التقليدية.</p>
+                        <p class="hidden" data-lang="en">Significant reduction in carbon emissions compared to conventional vehicles.</p>
+                    </div>
+                    <div class="reason-card">
+                        <i class="fas fa-bolt"></i>
+                        <h4 data-lang="ar">أداء فائق</h4>
+                        <h4 class="hidden" data-lang="en">Superior Performance</h4>
+                        <p data-lang="ar">عزم دوران فوري من المحرك الكهربائي لانطلاق قوي وسلس.</p>
+                        <p class="hidden" data-lang="en">Instant torque from the electric motor for powerful, smooth acceleration.</p>
+                    </div>
+                    <div class="reason-card">
+                        <i class="fas fa-gas-pump"></i>
+                        <h4 data-lang="ar">مدى قيادة ممتد</h4>
+                        <h4 class="hidden" data-lang="en">Extended Driving Range</h4>
+                        <p data-lang="ar">مزيج من البطارية والوقود يوفر مدى قيادة أطول دون الحاجة للشحن.</p>
+                        <p class="hidden" data-lang="en">A combination of battery and fuel provides a longer driving range without needing to recharge.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hybrid-car-section">
+            <div class="container">
+                <h2 class="section-title" data-lang="ar">مركبتنا الهجينة</h2>
+                <h2 class="section-title hidden" data-lang="en">Our Hybrid Vehicle</h2>
+                <p class="section-subtitle" data-lang="ar">استعرض مركبتنا الهجينة الرائدة.</p>
+                <p class="section-subtitle hidden" data-lang="en">Explore our flagship hybrid vehicle.</p>
+                
+                <!-- السيارة الوحيدة -->
+                <div class="hybrid-car-card">
+                    <div class="car-details">
+                        <div class="car-image">
+                            <img src="../images/c1.webp" alt="Nevo Q05 Royal">
+                        </div>
+                        <div class="car-info">
+                            <h3 data-lang="ar">نيفو كيو 05 رويال</h3>
+                            <h3 class="hidden" data-lang="en">Nevo Q05 Royal</h3>
+                            <!--<div class="price" data-lang="ar">ابتداءً من $18,000</div>
+                            <div class="price hidden" data-lang="en">Starting from $18,000</div>-->
+                            
+                            <div class="car-specs">
+                                <div class="spec-item">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <h4 data-lang="ar">النطاق</h4>
+                                    <h4 class="hidden" data-lang="en">Range</h4>
+                                    <p data-lang="ar">125 كم</p>
+                                    <p class="hidden" data-lang="en">800 km</p>
+                                </div>
+                                <div class="spec-item">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <h4 data-lang="ar">كفاءة الوقود</h4>
+                                    <h4 class="hidden" data-lang="en">Fuel Efficiency</h4>
+                                    <p data-lang="ar">4.5 لتر/100 كم</p>
+                                    <p class="hidden" data-lang="en">3.5 L/100km</p>
+                                </div>
+                                <div class="spec-item">
+                                    <i class="fas fa-stopwatch"></i>
+                                    <h4 data-lang="ar">التسارع</h4>
+                                    <h4 class="hidden" data-lang="en">Acceleration</h4>
+                                    <p data-lang="ar">0-100 كم/س في 7.2 ثانية</p>
+                                    <p class="hidden" data-lang="en">0-100 km/h in 7.2s</p>
+                                </div>
+                                <div class="spec-item">
+                                    <i class="fas fa-microchip"></i>
+                                    <h4 data-lang="ar">الذكاء الاصطناعي</h4>
+                                    <h4 class="hidden" data-lang="en">AI Technology</h4>
+                                    <p data-lang="ar">نظام مساعدة السائق المتقدم</p>
+                                    <p class="hidden" data-lang="en">Advanced Driver Assistance</p>
+                                </div>
+                            </div>
+                            
+                            <div class="car-features">
+                                <h4 data-lang="ar">الميزات الرئيسية</h4>
+                                <h4 class="hidden" data-lang="en">Key Features</h4>
+                                <ul>
+                                    <li data-lang="ar">نظام دفع هجين متقدم</li>
+                                    <li data-lang="ar">ضمان البطارية 8 سنوات</li>
+                                    <li data-lang="ar">نظام معلومات وترفيه بحجم 15.6 بوصة</li>
+                                    <li data-lang="ar">شحن لاسلكي للهاتف</li>
+                                    <li data-lang="ar">نظام صوتي فاخر</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="car-buttons">
+                                <a href="../test-drive.html" class="btn" data-lang="ar">حجز اختبار القيادة</a>
+                                <a href="../test-drive.html" class="btn hidden" data-lang="en">Book a Test Drive</a>
+                                <a href="../contact.html" class="btn btn-secondary" data-lang="ar">اتصل بنا للحصول على مزيد من المعلومات</a>
+                                <a href="../contact.html" class="btn btn-secondary hidden" data-lang="en">Contact Us for More Info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-hybrid">
+            <div class="container">
+                <h2 data-lang="ar">هل أنت مستعد لتجربة التميز الهجين؟</h2>
+                <h2 class="hidden" data-lang="en">Ready to experience hybrid excellence?</h2>
+                <p data-lang="ar">املأ النموذج أدناه وسوف يتصل بك أحد خبرائنا للإجابة على جميع أسئلتك حول المركبات الهجينة.</p>
+                <p class="hidden" data-lang="en">Fill out the form below and one of our experts will contact you to answer all your questions about hybrid vehicles.</p>
+                <div class="cta-form">
+                    <div class="form-group">
+                        <label data-lang="ar">الاسم الكامل</label>
+                        <label class="hidden" data-lang="en">Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-lang="ar">رقم الهاتف</label>
+                        <label class="hidden" data-lang="en">Phone Number</label>
+                        <input type="tel" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang="ar">البريد الإلكتروني</label>
+                        <label class="hidden" data-lang="en">Email Address</label>
+                        <input type="email" required>
+                    </div>
+                    <a href="../contact.html" class="btn" data-lang="ar">أرسل استفسارك</a>
+                    <a href="../contact.html" class="btn" data-lang="an">Send Your Inquiry </a>
+                    
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="../images/autoreference.png" alt="Changan Logo">
+                        <div></div>
+                    </div>
+                    <p data-lang="ar">الوكيل المعتمد الأول لسيارات شانجان في اليمن، والذي يقدم حلولاً مبتكرة في مجال السيارات للسوق اليمني.</p>
+                    <p data-lang="en" class="hidden">The first authorized Changan dealer in Yemen, offering innovative solutions in the automotive market.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4 data-lang="ar">روابط سريعة</h4>
+                    <h4 data-lang="en" class="hidden">Quick Links</h4>
+                    <ul>
+                        <li><a href="../about-us.html" data-lang="ar">معلومات عنا</a><a href="../about-us.html" class="hidden" data-lang="en">About Us</a></li>
+                        <li><a href="../mrka.html" data-lang="ar">ماركة شانجان</a><a href="../mrka.html" class="hidden" data-lang="en">Changan Brand</a></li>
+                        <li><a href="../services.html" data-lang="ar">خدمات</a><a href="../services.html" class="hidden" data-lang="en">Services</a></li>
+                        <li><a href="../contact.html" data-lang="ar">اتصل بنا</a><a href="../contact.html" class="hidden" data-lang="en">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 data-lang="ar">مركباتنا</h4>
+                    <h4 data-lang="en" class="hidden">Our Vehicles</h4>
+                    <ul>
+                        <li><a href="../pages/car-a.html" data-lang="ar">المركبات الكهربائية</a><a href="../pages/car-a.html" class="hidden" data-lang="en">Electric Vehicles</a></li>
+                        <li><a href="../pages/car-b.html" data-lang="ar">المركبات الهجينة</a><a href="../pages/car-b.html" class="hidden" data-lang="en">Hybrid Vehicles</a></li>
+                        <li><a href="../pages/‏‏car-c.html" data-lang="ar">مركبات تعمل بالبنزين</a><a href="../pages/‏‏car-c.html" class="hidden" data-lang="en">Gasoline Vehicles</a></li>
+                        <li><a href="../pages/‏‏‏‏car-e.html" data-lang="ar">مركبات الديزل</a><a href="../pages/‏‏‏‏car-e.html" class="hidden" data-lang="en">Diesel Vehicles</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 data-lang="ar">معلومات الاتصال</h4>
+                    <h4 data-lang="en" class="hidden">Contact Info</h4>
+                    <p data-lang="ar"><i class="fas fa-map-marker-alt icon-pin"></i>شارع الستين الغربي، صنعاء، اليمن</p>
+                    <p data-lang="en" class="hidden"><i class="fas fa-map-marker-alt icon-pin"></i>Sitteen Street West, Sana'a, Yemen</p>
+                    <p>
+                        <i class="fas fa-phone-alt icon-phone"></i>
+                        <span data-lang="ar" class="phone-ar">+967 776 661777</span>
+                        <span data-lang="en" class="hidden">+967 776 661777</span>
+                    </p>
+                    <p data-lang="ar"><i class="fas fa-envelope icon-email"></i>info@autoreference-ye.com</p>
+                    <p data-lang="en" class="hidden"><i class="fas fa-envelope icon-email"></i>info@autoreference-ye.com</p>
+                    <h4 data-lang="ar">ساعات العمل</h4>
+                    <h4 data-lang="en" class="hidden">Working Hours</h4>
+                    <p data-lang="ar"><i class="fas fa-clock icon-clock"></i>السبت - الخميس: 9:00 صباحًا - 6:00 مساءً<br>الجمعة: مغلق</p>
+                    <p data-lang="en" class="hidden"><i class="fas fa-clock icon-clock"></i>Sat - Thu: 9:00 AM - 6:00 PM<br>Friday: Closed</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-lang="ar">© 2025 اوتوريفرنس. جميع الحقوق محفوظة | الوكالة الرسمية لسيارات شانجان في اليمن</p>
+                <p data-lang="en" class="hidden">© 2025 AUTOREFERENCE. All Rights Reserved | Official Changan Dealership in Yemen</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            const dropdowns = document.querySelectorAll('.dropdown');
+            const langToggle = document.getElementById('lang-toggle');
+            const elements = document.querySelectorAll('[data-lang]');
+            let currentLang = 'ar';
+
+            // Toggle mobile menu
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            // Handle dropdowns on mobile
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    
+                    // Close all dropdowns
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+
+            // Language toggle
+            function updateLanguage() {
+                langToggle.textContent = currentLang === 'ar' ? 'English' : 'العربية';
+                document.documentElement.lang = currentLang;
+                document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+                elements.forEach(element => {
+                    const elementLang = element.getAttribute('data-lang');
+                    if (elementLang) {
+                        element.classList.toggle('hidden', elementLang !== currentLang);
+                    }
+                });
+
+                const phoneAr = document.querySelector('.phone-ar');
+                if (document.documentElement.dir === 'rtl') {
+                    phoneAr.style.unicodeBidi = 'bidi-override';
+                    phoneAr.style.direction = 'ltr';
+                } else {
+                    phoneAr.style.unicodeBidi = 'normal';
+                    phoneAr.style.direction = 'ltr';
+                }
+            }
+
+            langToggle.addEventListener('click', function() {
+                currentLang = currentLang === 'ar' ? 'en' : 'ar';
+                updateLanguage();
+            });
+
+            updateLanguage();
+        });
+    </script>
+</body>
+</html>

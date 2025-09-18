@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive Test Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .main-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2em;
+        }
+
+        p {
+            color: #666;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .controls a {
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-btn {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .lang-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .lang-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <h1>The Test Drive Feature Is Currently Unavailable</h1>
+        <p>You can visit the showroom or schedule an appointment for a later time.</p>
+    </div>
+
+    <div class="controls">
+        <a href="javascript:void(0);" class="home-btn" onclick="history.back()">Back</a>
+        <a href="javascript:void(0);" class="lang-btn" onclick="toggleLanguage()">عربي</a>
+    </div>
+
+    <script>
+        function toggleLanguage() {
+            var htmlElement = document.querySelector('html');
+            if (htmlElement.lang === 'en') {
+                htmlElement.lang = 'ar';
+                htmlElement.dir = 'rtl';
+                document.querySelector('h1').textContent = 'خاصية اختبار القيادة الآن مغلقة';
+                document.querySelector('p').textContent = 'يمكنك زيارة صالة العرض أو تحديد موعد لاحقًا.';
+                document.querySelector('.home-btn').textContent = 'رجوع';
+                document.querySelector('.lang-btn').textContent = 'English';
+                document.title = 'صفحة اختبار القيادة';
+            } else {
+                htmlElement.lang = 'en';
+                htmlElement.dir = 'ltr';
+                document.querySelector('h1').textContent = 'The Test Drive Feature Is Currently Unavailable';
+                document.querySelector('p').textContent = 'You can visit the showroom or schedule an appointment for a later time.';
+                document.querySelector('.home-btn').textContent = 'Back';
+                document.querySelector('.lang-btn').textContent = 'عربي';
+                document.title = 'Drive Test Page';
+            }
+        }
+    </script>
+</body>
+</html>
