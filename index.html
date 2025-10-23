@@ -24,7 +24,7 @@
         }
 
         * {
-            margin: 0;
+            margin: 0	; 
             padding: 0;
             box-sizing: border-box;
         }
@@ -759,44 +759,47 @@ a#login-btn:hover {
     </style>
 </head>
 <body>
-    <header>
-        <div class="container navbar">
-            <div class="logo">
-                <a href="./index.html">
-                    <img src="./images/autoreference.png" alt="Changan Logo">
-                </a>
-                <h2 data-lang="ar">اوتوريفرنس </h2>
-                <h2 class="hidden" data-lang="en">AUTOREFERENCE</h2>
-            </div>
-            <button class="menu-toggle" id="menu-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <nav>
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="./index.html" data-lang="ar">الرئيسية</a><a href="./index.html" class="hidden" data-lang="en">Home</a></li>
-                    <li class="dropdown">
-                        <a href="./pages/car.html" class="nav-link-with-icon" data-lang="ar">المركبات <i class="fas fa-chevron-down"></i></a>
-                        <a href="./pages/car.html" class="nav-link-with-icon hidden" data-lang="en">Vehicles <i class="fas fa-chevron-down"></i></a>
-                       
-                    </li>
-                    <li><a href="./mrka.html" data-lang="ar">ماركة شانجان</a><a href="./mrka.html" class="hidden" data-lang="en">Changan Brand</a></li>
-                    <li><a href="./services.html" data-lang="ar">خدمات</a><a href="./services.html" class="hidden" data-lang="en">Services</a></li>
-                    <li><a href="./about-us.html" data-lang="ar">معلومات عنا</a><a href="./about-us.html" class="hidden" data-lang="en">Cabout us</a></li>
-                    <li><a href="./contact.html" data-lang="ar">اتصل بنا</a><a href="./contact.html" class="hidden" data-lang="en">Contact Us</a></li>
-                      <li><a href="./test-drive.html" class="btn-test-drive" data-lang="ar">اختبار القيادة</a><a href="./test-drive.html" class="btn-test-drive hidden" data-lang="en">Test Drive</a></li>
-                </ul>
-            </nav>
-            <button id="lang-toggle">English</button>
-            <a id="login-btn" href="./signup.html">
-  <span data-lang="ar">تسجيل الدخول / إنشاء حساب</span>
-  <span data-lang="en" class="hidden">Login / Sign Up</span>
-</a>
+     <header>
+  <div class="container navbar">
+    <!-- الشعار -->
+    <div class="logo">
+      <a href="./index.html">
+        <img src="./images/autoreference.png" alt="Changan Logo">
+      </a>
+      <h2 data-lang="ar">اوتوريفرنس</h2>
+      <h2 class="hidden" data-lang="en">AUTOREFERENCE</h2>
+    </div>
 
-            
-        </div>
-    </header>
+    <!-- زر القائمة للجوال -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <!-- قسم التنقل -->
+    <nav class="nav-wrapper">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="./index.html" data-lang="ar">الرئيسية</a><a class="hidden" data-lang="en" href="./index.html">Home</a></li>
+        <li><a href="./vehicles.html" data-lang="ar">المركبات</a><a class="hidden" data-lang="en" href="./vehicles.html">Vehicles</a></li>
+        <li><a href="./services.html" data-lang="ar">خدمات</a><a class="hidden" data-lang="en" href="./services.html">Services</a></li>
+        <li><a href="./info.html" data-lang="ar">معلومات</a><a class="hidden" data-lang="en" href="./info.html">Info</a></li>
+        <li><a href="./contact.html" data-lang="ar">اتصل بنا</a><a class="hidden" data-lang="en" href="./contact.html">Contact</a></li>
+        <li><a href="./about.html" data-lang="ar">عنّا</a><a class="hidden" data-lang="en" href="./about.html">About</a></li>
+      </ul>
+
+      <!-- الأزرار -->
+      <div class="nav-buttons">
+        <button id="lang-toggle">English</button>
+        <a id="login-btn" href="./signup.html">
+          <span data-lang="ar">تسجيل الدخول / إنشاء حساب</span>
+          <span data-lang="en" class="hidden">Login / Sign Up</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+   
 
     <main>
         <section class="hero">
